@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OfficebalanceEditDlg" widgetVar="OfficebalanceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOfficebalanceTitle}">
+            <h:form id="OfficebalanceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{officebalanceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOfficebalanceLabel_balanceDate}" for="balanceDate" />
+                        <p:calendar id="balanceDate" pattern="dd/MM/yyyy" value="#{officebalanceController.selected.balanceDate}" title="#{bundle.EditOfficebalanceTitle_balanceDate}" required="true" requiredMessage="#{bundle.EditOfficebalanceRequiredMessage_balanceDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditOfficebalanceLabel_balance}" for="balance" />
+                        <p:inputText id="balance" value="#{officebalanceController.selected.balance}" title="#{bundle.EditOfficebalanceTitle_balance}" />
+                        <p:outputLabel value="#{bundle.EditOfficebalanceLabel_bankaccountId}" for="bankaccountId" />
+                        <p:selectOneMenu id="bankaccountId" value="#{officebalanceController.selected.bankaccountId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bankaccountController.itemsAvailableSelectOne}"
+                                           var="bankaccountIdItem"
+                                           itemValue="#{bankaccountIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{officebalanceController.update}" value="#{bundle.Save}" update="display,:OfficebalanceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OfficebalanceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OfficebalanceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

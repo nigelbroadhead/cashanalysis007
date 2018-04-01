@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NominalitemViewDlg" widgetVar="NominalitemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNominalitemTitle}">
+            <h:form id="NominalitemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nominalitemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_id}"/>
+                        <h:outputText value="#{nominalitemController.selected.id}" title="#{bundle.ViewNominalitemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_amount}"/>
+                        <h:outputText value="#{nominalitemController.selected.amount}" title="#{bundle.ViewNominalitemTitle_amount}"/>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_description}"/>
+                        <h:outputText value="#{nominalitemController.selected.description}" title="#{bundle.ViewNominalitemTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_finishDate}"/>
+                        <h:outputText value="#{nominalitemController.selected.finishDate}" title="#{bundle.ViewNominalitemTitle_finishDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_movable}"/>
+                        <p:selectBooleanCheckbox value="#{nominalitemController.selected.movable}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_sign}"/>
+                        <h:outputText value="#{nominalitemController.selected.sign}" title="#{bundle.ViewNominalitemTitle_sign}"/>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_startDate}"/>
+                        <h:outputText value="#{nominalitemController.selected.startDate}" title="#{bundle.ViewNominalitemTitle_startDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewNominalitemLabel_frequencyId}"/>
+                        <h:outputText value="#{nominalitemController.selected.frequencyId}" title="#{bundle.ViewNominalitemTitle_frequencyId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="NominalitemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

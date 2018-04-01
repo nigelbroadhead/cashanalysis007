@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BankViewDlg" widgetVar="BankViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBankTitle}">
+            <h:form id="BankViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bankController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBankLabel_id}"/>
+                        <h:outputText value="#{bankController.selected.id}" title="#{bundle.ViewBankTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewBankLabel_bankName}"/>
+                        <h:outputText value="#{bankController.selected.bankName}" title="#{bundle.ViewBankTitle_bankName}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BankViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

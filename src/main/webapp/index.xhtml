@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            #{bundle.AppName}
+            <h:outputStylesheet name="css/jsfcrud.css"/>
+        </ui:define>    
+        <ui:define name="body">
+            <h:form id="form">
+                <br/><br/><br/>
+                #{bundle.IndexToday} #{indexController.todaysDate}
+                <br/><br/><br/>
+                <h:panelGrid columns="7" cellpadding="5">
+                    <p:outputLabel for="analysisoptions" value="#{bundle.IndexLabel_AnalysisOptions}" />
+                    <p:selectOneMenu id="analysisoptions" style="width: auto" value="#{indexController.selectedAnalysisOption}"  styleClass="ui-priority-primary">
+                        <f:selectItem itemLabel="#{bundle.Index_AnalysisOptionsSelectItem}" itemValue="reset" />
+                        <f:selectItems value="#{indexController.analysisoptions}"/>
+                        <p:ajax event="itemSelect" listener="#{indexController.doAnalysis}" update="form" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundle.IndexLabel_DateFrom}" />
+                    <p:calendar id="startDate" value="#{indexController.startDate}" disabledWeekends="true" showButtonPanel="true" disabled="#{indexController.startDateDisabled}">
+                        <p:ajax event="dateSelect" update="form" />
+                    </p:calendar>
+                    <p:outputLabel value="#{bundle.IndexLabel_DateTo}" />
+                    <p:calendar id="endDate" value="#{indexController.endDate}" disabledWeekends="true" showButtonPanel="true" disabled="#{indexController.endDateDisabled}">
+                    </p:calendar>
+                    <p:commandButton value="#{bundle.IndexButton_Go}" id="ajax" update="form" actionListener="#{indexController.onDateSelected}" styleClass="ui-priority-primary" />
+                </h:panelGrid>         
+                <h:panelGrid columns="3" cellpadding="5" >
+
+                    <p:outputLabel for="valueOfCompletionsUnderAnalysis" value="#{bundle.IndexLabel_valueOfCompletionsUnderAnalysis}" />
+                    <h:outputText id="valueOfCompletionsUnderAnalysis" value="#{indexController.valueOfCompletionsUnderAnalysis}" />
+                    <p:outputLabel id="sideNoteToValueOfCompletionsUnderAnalysis" value="#{indexController.sideNoteToValueOfCompletionsUnderAnalysis}" />
+
+                    <p:outputLabel for="bankBalance" value="#{bundle.IndexLabel_BankBalance}" />
+                    <h:outputText id="bankBalance" value="#{indexController.bankBalance}" />
+                    <p:outputLabel id="sideNoteToBankBalance" value="#{indexController.sideNoteToBankBalance}" />
+
+                    <p:outputLabel for="valueOfCompletionsToday" value="#{bundle.IndexLabel_ValueOfCompletionsToday}" />
+                    <h:outputText id="valueOfCompletionsToday" value="#{indexController.valueOfCompletionsToday}" />
+                    <p:outputLabel id="sideNoteToValueOfCompletionsToday" value="#{indexController.sideNoteToValueOfCompletionsToday}" />
+                </h:panelGrid>
+                <p:poll interval="3" listener="#{indexController.populateBankBalance}" update="bankBalance" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

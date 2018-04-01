@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NominalitemCreateDlg" widgetVar="NominalitemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNominalitemTitle}">
+            <h:form id="NominalitemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nominalitemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_amount}" for="amount" />
+                        <p:inputText id="amount" value="#{nominalitemController.selected.amount}" title="#{bundle.CreateNominalitemTitle_amount}" />
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{nominalitemController.selected.description}" title="#{bundle.CreateNominalitemTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_finishDate}" for="finishDate" />
+                        <p:calendar id="finishDate" pattern="dd/MM/yyyy" value="#{nominalitemController.selected.finishDate}" title="#{bundle.EditNominalitemTitle_finishDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_movable}" for="movable" />
+                        <p:selectBooleanCheckbox id="movable" value="#{nominalitemController.selected.movable}" />
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_sign}" for="sign" />
+                        <p:inputText id="sign" value="#{nominalitemController.selected.sign}" title="#{bundle.CreateNominalitemTitle_sign}" />
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="dd/MM/yyyy" value="#{nominalitemController.selected.startDate}" title="#{bundle.EditNominalitemTitle_startDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateNominalitemLabel_frequencyId}" for="frequencyId" />
+                        <p:selectOneMenu id="frequencyId" value="#{nominalitemController.selected.frequencyId}" >
+                            <f:selectItems value="#{frequencyController.itemsAvailableSelectOne}"
+                                           var="frequencyIdItem"
+                                           itemValue="#{frequencyIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nominalitemController.create}" value="#{bundle.Save}" update="display,:NominalitemListForm:datalist,:growl" oncomplete="handleSubmit(args,'NominalitemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NominalitemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

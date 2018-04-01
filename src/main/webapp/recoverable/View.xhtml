@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecoverableViewDlg" widgetVar="RecoverableViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRecoverableTitle}">
+            <h:form id="RecoverableViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recoverableController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRecoverableLabel_id}"/>
+                        <h:outputText value="#{recoverableController.selected.id}" title="#{bundle.ViewRecoverableTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewRecoverableLabel_itemName}"/>
+                        <h:outputText value="#{recoverableController.selected.itemName}" title="#{bundle.ViewRecoverableTitle_itemName}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RecoverableViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

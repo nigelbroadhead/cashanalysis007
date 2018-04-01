@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IncrementEditDlg" widgetVar="IncrementEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIncrementTitle}">
+            <h:form id="IncrementEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{incrementController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIncrementLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{incrementController.selected.id}" title="#{bundle.EditIncrementTitle_id}" required="true" requiredMessage="#{bundle.EditIncrementRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditIncrementLabel_numberOfDays}" for="numberOfDays" />
+                        <p:inputText id="numberOfDays" value="#{incrementController.selected.numberOfDays}" title="#{bundle.EditIncrementTitle_numberOfDays}" />
+                        <p:outputLabel value="#{bundle.EditIncrementLabel_percentage}" for="percentage" />
+                        <p:inputText id="percentage" value="#{incrementController.selected.percentage}" title="#{bundle.EditIncrementTitle_percentage}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{incrementController.update}" value="#{bundle.Save}" update="display,:IncrementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IncrementEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IncrementEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

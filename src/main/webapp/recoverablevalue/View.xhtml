@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecoverablevalueViewDlg" widgetVar="RecoverablevalueViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRecoverablevalueTitle}">
+            <h:form id="RecoverablevalueViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recoverablevalueController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRecoverablevalueLabel_id}"/>
+                        <h:outputText value="#{recoverablevalueController.selected.id}" title="#{bundle.ViewRecoverablevalueTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewRecoverablevalueLabel_amount}"/>
+                        <h:outputText value="#{recoverablevalueController.selected.amount}" title="#{bundle.ViewRecoverablevalueTitle_amount}"/>
+                        <h:outputText value="#{bundle.ViewRecoverablevalueLabel_itemDate}"/>
+                        <h:outputText value="#{recoverablevalueController.selected.itemDate}" title="#{bundle.ViewRecoverablevalueTitle_itemDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRecoverablevalueLabel_sign}"/>
+                        <h:outputText value="#{recoverablevalueController.selected.sign}" title="#{bundle.ViewRecoverablevalueTitle_sign}"/>
+                        <h:outputText value="#{bundle.ViewRecoverablevalueLabel_recoverableId}"/>
+                        <h:outputText value="#{recoverablevalueController.selected.recoverableId}" title="#{bundle.ViewRecoverablevalueTitle_recoverableId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RecoverablevalueViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

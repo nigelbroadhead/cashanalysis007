@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BankaccountEditDlg" widgetVar="BankaccountEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBankaccountTitle}">
+            <h:form id="BankaccountEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bankaccountController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBankaccountLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bankaccountController.selected.id}" title="#{bundle.EditBankaccountTitle_id}" required="true" requiredMessage="#{bundle.EditBankaccountRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditBankaccountLabel_accountNumber}" for="accountNumber" />
+                        <p:inputText id="accountNumber" value="#{bankaccountController.selected.accountNumber}" title="#{bundle.EditBankaccountTitle_accountNumber}" />
+                        <p:outputLabel value="#{bundle.EditBankaccountLabel_sortcode}" for="sortcode" />
+                        <p:inputText id="sortcode" value="#{bankaccountController.selected.sortcode}" title="#{bundle.EditBankaccountTitle_sortcode}" />
+                        <p:outputLabel value="#{bundle.EditBankaccountLabel_bankId}" for="bankId" />
+                        <p:selectOneMenu id="bankId" value="#{bankaccountController.selected.bankId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bankController.itemsAvailableSelectOne}"
+                                           var="bankIdItem"
+                                           itemValue="#{bankIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bankaccountController.update}" value="#{bundle.Save}" update="display,:BankaccountListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BankaccountEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BankaccountEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

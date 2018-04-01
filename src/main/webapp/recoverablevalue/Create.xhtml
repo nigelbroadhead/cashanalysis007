@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecoverablevalueCreateDlg" widgetVar="RecoverablevalueCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRecoverablevalueTitle}">
+            <h:form id="RecoverablevalueCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recoverablevalueController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRecoverablevalueLabel_amount}" for="amount" />
+                        <p:inputText id="amount" value="#{recoverablevalueController.selected.amount}" title="#{bundle.CreateRecoverablevalueTitle_amount}" />
+                        <p:outputLabel value="#{bundle.CreateRecoverablevalueLabel_itemDate}" for="itemDate" />
+                        <p:calendar id="itemDate" pattern="dd/MM/yyyy" value="#{recoverablevalueController.selected.itemDate}" title="#{bundle.EditRecoverablevalueTitle_itemDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateRecoverablevalueLabel_sign}" for="sign" />
+                        <p:inputText id="sign" value="#{recoverablevalueController.selected.sign}" title="#{bundle.CreateRecoverablevalueTitle_sign}" />
+                        <p:outputLabel value="#{bundle.CreateRecoverablevalueLabel_recoverableId}" for="recoverableId" />
+                        <p:selectOneMenu id="recoverableId" value="#{recoverablevalueController.selected.recoverableId}" >
+                            <f:selectItems value="#{recoverableController.itemsAvailableSelectOne}"
+                                           var="recoverableIdItem"
+                                           itemValue="#{recoverableIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{recoverablevalueController.create}" value="#{bundle.Save}" update="display,:RecoverablevalueListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecoverablevalueCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RecoverablevalueCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
