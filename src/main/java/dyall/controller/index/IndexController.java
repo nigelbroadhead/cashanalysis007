@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dyall.controller;
+package dyall.controller.index;
 
+import dyall.controller.index.RecoverableLogic;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -39,6 +41,9 @@ public class IndexController implements Serializable {
     @Resource
     private javax.transaction.UserTransaction utx;
 
+    @Inject
+    private RecoverableLogic recoverablesLogic;
+    
     private String todaysDate;
 
     private Date startDate;
@@ -75,6 +80,7 @@ public class IndexController implements Serializable {
     @PostConstruct
     public void init() {
         this.resetView();
+        getRecoverablesLogic().getNetValueOfRecoverables();
     }
 
     public void dateForHeader() {
@@ -270,9 +276,9 @@ public class IndexController implements Serializable {
 
     public void persist(Object object) {
         try {
-            utx.begin();
+            getUtx().begin();
             getEm().persist(object);
-            utx.commit();
+            getUtx().commit();
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             throw new RuntimeException(e);
@@ -710,6 +716,34 @@ public class IndexController implements Serializable {
      */
     public void setBankBalance(String bankBalance) {
         this.bankBalance = bankBalance;
+    }
+
+    /**
+     * @return the utx
+     */
+    public javax.transaction.UserTransaction getUtx() {
+        return utx;
+    }
+
+    /**
+     * @param utx the utx to set
+     */
+    public void setUtx(javax.transaction.UserTransaction utx) {
+        this.utx = utx;
+    }
+
+    /**
+     * @return the recoverablesLogic
+     */
+    public RecoverableLogic getRecoverablesLogic() {
+        return recoverablesLogic;
+    }
+
+    /**
+     * @param recoverablesLogic the recoverablesLogic to set
+     */
+    public void setRecoverablesLogic(RecoverableLogic recoverablesLogic) {
+        this.recoverablesLogic = recoverablesLogic;
     }
 
 }

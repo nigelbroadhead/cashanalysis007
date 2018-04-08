@@ -4,6 +4,7 @@ package dyall.controller;
  *
  * @author nigel
  */
+import dyall.controller.index.IndexController;
 import dyall.entity.CompletionStats;
 import java.io.Serializable;
 import java.util.Date;

@@ -29,17 +29,37 @@
                     <p:calendar id="endDate" value="#{indexController.endDate}" disabledWeekends="true" showButtonPanel="true" disabled="#{indexController.endDateDisabled}">
                     </p:calendar>
                     <p:commandButton value="#{bundle.IndexButton_Go}" id="ajax" update="form" actionListener="#{indexController.onDateSelected}" styleClass="ui-priority-primary" />
-                </h:panelGrid>         
+                </h:panelGrid>
+                <br/>
                 <h:panelGrid columns="3" cellpadding="5" >
-
                     <p:outputLabel for="valueOfCompletionsUnderAnalysis" value="#{bundle.IndexLabel_valueOfCompletionsUnderAnalysis}" />
                     <h:outputText id="valueOfCompletionsUnderAnalysis" value="#{indexController.valueOfCompletionsUnderAnalysis}" />
                     <p:outputLabel id="sideNoteToValueOfCompletionsUnderAnalysis" value="#{indexController.sideNoteToValueOfCompletionsUnderAnalysis}" />
-
+                </h:panelGrid>
+                <br/>
+                <h:panelGrid columns="3" cellpadding="5" >
                     <p:outputLabel for="bankBalance" value="#{bundle.IndexLabel_BankBalance}" />
                     <h:outputText id="bankBalance" value="#{indexController.bankBalance}" />
                     <p:outputLabel id="sideNoteToBankBalance" value="#{indexController.sideNoteToBankBalance}" />
+                </h:panelGrid>
+                <br/>
+                &#xA0;#{bundle.IndexLabel_Recoverables}
 
+                <style type="text/css">
+                    .datalist-noborder .ui-widget-content {
+                        border: none;
+                    }
+                </style>
+
+                <div class="datalist-noborder">
+                    <p:dataList value="#{recoverableView.recoverableCategories}" var="rec" type="definition" itemType="&#xA0;&#xA0;" style="border-color: transparent" >
+                        &#xA0;&#xA0;
+                        #{rec.itemName}:
+                        <br/>
+                    </p:dataList>
+                </div>
+
+                <h:panelGrid columns="3" cellpadding="5" >
                     <p:outputLabel for="valueOfCompletionsToday" value="#{bundle.IndexLabel_ValueOfCompletionsToday}" />
                     <h:outputText id="valueOfCompletionsToday" value="#{indexController.valueOfCompletionsToday}" />
                     <p:outputLabel id="sideNoteToValueOfCompletionsToday" value="#{indexController.sideNoteToValueOfCompletionsToday}" />
