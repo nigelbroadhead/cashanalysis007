@@ -21,14 +21,14 @@ import javax.inject.Named;
 @SessionScoped
 public class RecoverableView implements Serializable {
      
-    private List<Recoverable> recoverableCategories;
+    private List<RecoverableDisplay> recoverableList;
     
     @Inject
     private RecoverableService service;
  
     @PostConstruct
     public void init() {
-        setRecoverableCategories(service.createRecoverableCategories());
+        setRecoverableList(service.createRecoverableCategories());
     }
      
     public void setService(RecoverableService service) {
@@ -36,16 +36,18 @@ public class RecoverableView implements Serializable {
     }
 
     /**
-     * @return the recoverableCategories
+     * @return the recoverableList
      */
-    public List<Recoverable> getRecoverableCategories() {
-        return recoverableCategories;
+    public List<RecoverableDisplay> getRecoverableList() {
+        return recoverableList;
     }
 
     /**
-     * @param recoverableCategories the recoverableCategories to set
+     * @param recoverableList the recoverableList to set
      */
-    public void setRecoverableCategories(List<Recoverable> recoverableCategories) {
-        this.recoverableCategories = recoverableCategories;
+    public void setRecoverableList(List<RecoverableDisplay> recoverableList) {
+        this.recoverableList = recoverableList;
     }
+
+
 }

@@ -35,12 +35,20 @@
                     <p:outputLabel for="valueOfCompletionsUnderAnalysis" value="#{bundle.IndexLabel_valueOfCompletionsUnderAnalysis}" />
                     <h:outputText id="valueOfCompletionsUnderAnalysis" value="#{indexController.valueOfCompletionsUnderAnalysis}" />
                     <p:outputLabel id="sideNoteToValueOfCompletionsUnderAnalysis" value="#{indexController.sideNoteToValueOfCompletionsUnderAnalysis}" />
-                </h:panelGrid>
-                <br/>
-                <h:panelGrid columns="3" cellpadding="5" >
+
+                    <p:outputLabel value=""></p:outputLabel>
+                    <h:outputText value="" />
+                    <p:outputLabel value=""></p:outputLabel>
+
                     <p:outputLabel for="bankBalance" value="#{bundle.IndexLabel_BankBalance}" />
                     <h:outputText id="bankBalance" value="#{indexController.bankBalance}" />
                     <p:outputLabel id="sideNoteToBankBalance" value="#{indexController.sideNoteToBankBalance}" />
+
+                    <p:outputLabel value=""></p:outputLabel>
+                    <h:outputText value="" />
+                    <p:outputLabel value=""></p:outputLabel>
+
+
                 </h:panelGrid>
                 <br/>
                 &#xA0;#{bundle.IndexLabel_Recoverables}
@@ -52,10 +60,12 @@
                 </style>
 
                 <div class="datalist-noborder">
-                    <p:dataList value="#{recoverableView.recoverableCategories}" var="rec" type="definition" itemType="&#xA0;&#xA0;" style="border-color: transparent" >
-                        &#xA0;&#xA0;
-                        #{rec.itemName}:
-                        <br/>
+                    <p:dataList  value="#{recoverableView.recoverableList}" var="rec" type="definition" itemType="&#xA0;&#xA0;" style="border-color: transparent" >
+                        <h:panelGrid columns="3" cellpadding="5" >
+                            <p:outputLabel for="recoverableAmount" value="&#xA0;&#xA0;#{rec.recoverableName}"></p:outputLabel>
+                            <h:outputText id="recoverableAmount" value="£#{rec.recoverableAmount}" />
+                            <p:outputLabel value=""></p:outputLabel>    
+                        </h:panelGrid>                   
                     </p:dataList>
                 </div>
 
