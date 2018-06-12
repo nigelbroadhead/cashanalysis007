@@ -60,8 +60,6 @@ public class RecoverableService {
         qPlus.setParameter("sign", "+");
         qPlus.setParameter("recoverableId", recoverable);
         BigDecimal resultPlus = (BigDecimal) qPlus.getSingleResult();
-//        System.out.println("result = " + result);
-//        String recoverableValue = "2000.00";
         BigDecimal result = resultMinus.subtract(resultPlus);
         return result;
     }
